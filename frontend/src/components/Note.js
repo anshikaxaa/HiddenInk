@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 
-const Note = () => {
+const Note = ({ onAddNote }) => {
   const [content, setContent] = useState('');
 
   const handleChange = (e) => {
     setContent(e.target.value);
+  };
+
+  const handleSave = () => {
+    if (content.trim()) {
+      onAddNote({ title: 'Note', content: content.trim() });
+      setContent('');
+    }
   };
 
   return (
@@ -16,6 +23,12 @@ const Note = () => {
         value={content}
         onChange={handleChange}
       />
+      <button
+        onClick={handleSave}
+        className="mt-2 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+      >
+        Save Note
+      </button>
     </div>
   );
 };
