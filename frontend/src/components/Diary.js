@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 
-const Diary = ({ notes }) => {
+const Diary = ({ notes, theme }) => {
   const [page, setPage] = useState(0);
 
   const onFlip = (e) => {
@@ -9,8 +9,8 @@ const Diary = ({ notes }) => {
   };
 
   return (
-    <div className="diary-container h-full bg-yellow-100 p-4 flex flex-col">
-      <nav className="bg-yellow-800 text-white p-4 mb-4 rounded">
+    <div className="diary-container h-full bg-yellow-100 dark:bg-gray-900 p-4 flex flex-col">
+      <nav className="bg-yellow-800 dark:bg-gray-800 text-white p-4 mb-4 rounded">
         <h1 className="text-xl font-bold">Secret Diary</h1>
       </nav>
 
@@ -30,16 +30,16 @@ const Diary = ({ notes }) => {
           onFlip={onFlip}
           className="shadow-lg"
         >
-        <div className="page bg-yellow-300 flex items-center justify-center text-2xl font-bold">
+        <div className="page bg-yellow-300 dark:bg-gray-700 flex items-center justify-center text-2xl font-bold text-black dark:text-white">
           Cover Page (Locked)
         </div>
         {notes.length === 0 && (
-          <div className="page bg-white p-4 flex items-center justify-center italic">
+          <div className="page bg-white dark:bg-gray-800 p-4 flex items-center justify-center italic text-black dark:text-white">
             No notes in this folder.
           </div>
         )}
         {notes.map((note, index) => (
-          <div key={index} className="page bg-white p-6">
+          <div key={index} className="page bg-white dark:bg-gray-800 p-6 text-black dark:text-white">
             <h2 className="text-xl font-semibold mb-2">{note.title}</h2>
             <p className="whitespace-pre-wrap">{note.content}</p>
           </div>
