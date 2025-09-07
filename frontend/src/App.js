@@ -1,64 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import Diary from './components/Diary';
-import Note from './components/Note';
-import Folders from './components/Folders';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import ThemeToggle from './components/ThemeToggle';
 
 function App() {
-  const [showNote, setShowNote] = useState(false);
-  const [folders, setFolders] = useState([{ name: 'Default', notes: [] }]);
-  const [selectedFolder, setSelectedFolder] = useState(0);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-  }, [theme]);
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
-  const handleCreateFolder = (name) => {
-    setFolders([...folders, { name, notes: [] }]);
-  };
-
-  const handleAddNote = (note) => {
-    const updatedFolders = [...folders];
-    updatedFolders[selectedFolder].notes.push(note);
-    setFolders(updatedFolders);
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem('theme', newTheme);
   };
 
   return (
-    <div className={`App flex h-screen ${theme === 'dark' ? 'dark' : ''}`}>
-      <Folders
-        folders={folders}
-        selectedFolder={selectedFolder}
-        onSelectFolder={setSelectedFolder}
-        onCreateFolder={handleCreateFolder}
-        theme={theme}
-      />
-      <div className="flex-1">
-        {showNote ? (
-          <Note onAddNote={handleAddNote} theme={theme} />
-        ) : (
-          <Diary notes={folders[selectedFolder].notes} theme={theme} />
-        )}
-        <div className="fixed bottom-4 right-4 flex space-x-2">
-          <button
-            onClick={toggleTheme}
-            className="bg-gray-500 text-white px-4 py-2 rounded shadow hover:bg-gray-600 transition"
-          >
-            {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-          </button>
-          <button
-            onClick={() => setShowNote(!showNote)}
-            className="bg-yellow-500 text-white px-4 py-2 rounded shadow hover:bg-yellow-600 transition dark:bg-yellow-600 dark:hover:bg-yellow-700"
-          >
-            {showNote ? 'Back to Diary' : 'Open Note Editor'}
-          </button>
-        </div>
-      </div>
-    </div>
+    <Router>
+      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      <Routes>
+        <Route path="/login" element={<Login theme={theme} />} />
+        <Route path="/signup" element={<Signup theme={theme} />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
   );
 }
 
