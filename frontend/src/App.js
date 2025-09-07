@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import DiaryPage from './pages/DiaryPage';
 import ThemeToggle from './components/ThemeToggle';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login theme={theme} />} />
         <Route path="/signup" element={<Signup theme={theme} />} />
+        <Route path="/diary" element={<DiaryPage theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
