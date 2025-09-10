@@ -51,5 +51,5 @@ HiddenInk/
 
 ## Deployment
 - Frontend can be deployed on Vercel, Netlify, etc.
-- Backend can be deployed on platforms like Render, Heroku, or your own server.
+- Backend can be deployed on platforms like Vercel, Render, Heroku, or your own server.
 
