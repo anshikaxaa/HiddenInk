@@ -3,7 +3,10 @@ import jwt from 'jsonwebtoken';
 import User from '../../../models/User.js';
 import cors from 'cors';
 
-const corsHandler = cors();
+const corsHandler = cors({
+  origin: ['https://hidden-inkkk-wcop.vercel.app', 'http://localhost:3000'],
+  credentials: true
+});
 
 const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
