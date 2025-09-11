@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = 'https://hidden-inkkk-wcop-88ug3jbor-anshika-singhs-projects-529672f4.vercel.app/api';
 
 // Helper function to get auth token from localStorage
 const getAuthToken = () => {
@@ -55,6 +55,7 @@ export const authAPI = {
     return handleResponse(response);
   },
 };
+
 
 // Notes API calls
 export const notesAPI = {
