@@ -4,10 +4,7 @@ import User from '../../models/User.js';
 import cors from 'cors';
 
 const corsHandler = cors({
-  origin: [
-    'https://hidden-inkk.vercel.app',
-    'http://localhost:3000'
-  ],
+  origin: process.env.CORS_ORIGIN || 'https://hidden-ink.vercel.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
