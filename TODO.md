@@ -27,9 +27,12 @@
 - [x] Fix Vercel deployment structure (moved API routes to root level)
 
 ## 🔄 Current Status
-- Backend API structure reorganized for Vercel deployment
-- Import paths updated for new structure
-- Ready for redeployment to Vercel
+- ✅ Backend API structure reorganized for Vercel deployment
+- ✅ Import paths updated for new structure
+- ✅ vercel.json updated to fix 404 on API routes (added proper rewrites for /api/* and fixed runtime)
+- ✅ models/User.js updated to use ES module export
+- ✅ Changes committed and pushed to GitHub
+- 🔄 Waiting for Vercel to redeploy backend
 
 ## 📋 Next Steps
 

@@ -47,7 +47,7 @@ app.get('/health', (req, res) => {
 // Connect to MongoDB
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://anshikaxaaa_db_user:5Eg5HXH7T9nC9A4k@cluster0.ynsiafl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+    const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://anshikaxaaa_db_user:Ansh1k@@S1ng#@hidden-ink.xzafrer.mongodb.net/?retryWrites=true&w=majority&appName=Hidden-ink';
     await mongoose.connect(mongoURI);
     console.log('MongoDB connected successfully');
   } catch (error) {

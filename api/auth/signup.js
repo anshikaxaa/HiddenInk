@@ -4,8 +4,13 @@ import User from '../../models/User.js';
 import cors from 'cors';
 
 const corsHandler = cors({
-  origin: process.env.CORS_ORIGIN || 'https://hidden-inkk.vercel.app',
-  credentials: true
+  origin: [
+    'https://hidden-inkk.vercel.app',
+    'http://localhost:3000'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 });
 
 const generateToken = (userId) => {
@@ -13,6 +18,8 @@ const generateToken = (userId) => {
 };
 
 export default async function handler(req, res) {
+  console.log("JWT_SECRET set:", !!process.env.JWT_SECRET);
+  console.log("CORS_ORIGIN:", process.env.CORS_ORIGIN);
   await connectToDatabase();
   await new Promise((resolve) => corsHandler(req, res, resolve));
   if (req.method === 'OPTIONS') return res.status(200).end();

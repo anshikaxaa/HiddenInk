@@ -4,7 +4,7 @@ import User from '../../../models/User.js';
 import cors from 'cors';
 
 const corsHandler = cors({
-  origin: ['https://hidden-inkkk-wcop.vercel.app', 'http://localhost:3000'],
+  origin: process.env.CORS_ORIGIN || 'https://hidden-inkk.vercel.app',
   credentials: true
 });
 
