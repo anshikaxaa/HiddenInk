@@ -3,11 +3,11 @@
   "outputDirectory": "build",
   "functions": {
     "api/**/*.js": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@18.x"
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/api/(.*)", "dest": "/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

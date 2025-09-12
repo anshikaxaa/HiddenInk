@@ -1,3 +1,8 @@
 export default function handler(req, res) {
-  res.status(200).json({ message: 'Backend API is live and reachable' });
+  res.status(200).json({
+    message: 'API is working!',
+    timestamp: new Date().toISOString(),
+    method: req.method,
+    url: req.url
+  });
 }
