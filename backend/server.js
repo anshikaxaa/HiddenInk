@@ -59,15 +59,20 @@ const connectDB = async () => {
 // Start server
 const PORT = process.env.PORT || 5000;
 
-const startServer = async () => {
-  await connectDB();
+// For Vercel deployment
+if (process.env.NODE_ENV === 'production') {
+  // Vercel will handle the server
+  module.exports = app;
+} else {
+  // Local development
+  const startServer = async () => {
+    await connectDB();
 
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  });
-};
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    });
+  };
 
-startServer();
-
-module.exports = app;
+  startServer();
+}
