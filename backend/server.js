@@ -8,6 +8,12 @@ dotenv.config();
 
 const app = express();
 
+// Add error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Express Error:', err);
+  res.status(500).json({ error: 'Internal Server Error', message: err.message });
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -28,21 +34,26 @@ app.get('/api/protected', authenticateToken, (req, res) => {
 
 // Basic route for testing
 app.get('/', (req, res) => {
+  console.log('Root route accessed');
   res.json({
     message: 'Secret Diary API Server',
     status: 'running',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
   });
 });
 
 // Health check route
 app.get('/health', (req, res) => {
+  console.log('Health check accessed');
   res.json({
     status: 'healthy',
     uptime: process.uptime(),
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
   });
 });
+
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -61,7 +72,8 @@ const PORT = process.env.PORT || 5000;
 
 // For Vercel deployment
 if (process.env.NODE_ENV === 'production') {
-  // Vercel will handle the server
+  // Initialize database connection for Vercel
+  connectDB().catch(console.error);
   module.exports = app;
 } else {
   // Local development
