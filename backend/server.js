@@ -1,7 +1,7 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config();
@@ -19,8 +19,8 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-const authRoutes = require('./routes/auth');
-const { authenticateToken } = require('./middleware/auth');
+import authRoutes from './routes/auth.js';
+import { authenticateToken } from './middleware/auth.js';
 
 app.use('/api/auth', authRoutes);
 
