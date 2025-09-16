@@ -58,7 +58,7 @@ app.get('/health', (req, res) => {
 // Connect to MongoDB
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://anshikaxaaa_db_user:Ansh1k@@S1ng#@hidden-ink.xzafrer.mongodb.net/?retryWrites=true&w=majority&appName=Hidden-ink';
+    const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://anshikaxaaa_db_user:Ansh1k%40%40S1ng%23@hidden-ink.xzafrer.mongodb.net/?retryWrites=true&w=majority&appName=Hidden-ink';
     await mongoose.connect(mongoURI);
     console.log('MongoDB connected successfully');
   } catch (error) {
@@ -80,9 +80,10 @@ if (process.env.NODE_ENV === 'production') {
   const startServer = async () => {
     await connectDB();
 
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`Accessible at: http://localhost:${PORT} and http://192.168.1.8:${PORT}`);
     });
   };
 

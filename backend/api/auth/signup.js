@@ -1,10 +1,21 @@
-import connectToDatabase from '../../../utils/db.js';
+import connectToDatabase from '../../utils/db.js';
 import jwt from 'jsonwebtoken';
-import User from '../../../models/User.js';
+import User from '../../models/User.js';
 import cors from 'cors';
 
 const corsHandler = cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://192.168.1.8:3000',
+      process.env.CORS_ORIGIN
+    ].filter(Boolean);
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 });
 

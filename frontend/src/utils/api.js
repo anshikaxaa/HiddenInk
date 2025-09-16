@@ -1,4 +1,19 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://hidden-ink.vercel.app/api';
+// Determine API base URL based on current location
+const getApiBaseUrl = () => {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+
+  // If accessing from network IP, use network backend URL
+  if (window.location.hostname === '192.168.1.8') {
+    return 'http://192.168.1.8:5000/api';
+  }
+
+  // Default to localhost for local development
+  return 'http://localhost:5000/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 // Helper function to get auth token from localStorage
 const getAuthToken = () => {
