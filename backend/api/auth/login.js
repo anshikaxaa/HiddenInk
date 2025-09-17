@@ -1,6 +1,6 @@
-import connectToDatabase from '../../../utils/db.js';
+import connectToDatabase from '../../utils/db.js';
 import jwt from 'jsonwebtoken';
-import User from '../../../models/User.js';
+import User from '../../models/User.js';
 import cors from 'cors';
 
 const corsHandler = cors({
