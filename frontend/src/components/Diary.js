@@ -20,14 +20,14 @@ const Diary = ({ notes, theme }) => {
           }
         `}
       </style>
-      <div className="diary-container h-full bg-yellow-100 dark:bg-gray-900 p-4 flex flex-col">
-        <nav className="bg-yellow-800 dark:bg-gray-800 text-white p-4 mb-4 rounded">
+      <div className="diary-container h-full bg-pink-100 dark:bg-gray-900 p-4 flex flex-col">
+        <nav className="bg-pink-800 dark:bg-gray-800 text-white p-4 mb-4 rounded">
           <h1 className="text-xl font-bold">Secret Diary</h1>
         </nav>
 
         <div className="flex-1 flex justify-center items-center">
           <HTMLFlipBook
-            key={notes.length}  // force remount when notes change
+            key={notes.length}
             width={500}
             height={600}
             size="stretch"
@@ -41,8 +41,17 @@ const Diary = ({ notes, theme }) => {
             onFlip={onFlip}
             className="shadow-lg"
           >
-            <div className="page bg-yellow-300 dark:bg-gray-700 flex items-center justify-center text-2xl font-bold text-black dark:text-white border border-black rounded-sm">
-              Cover Page (Locked)
+            {/* THIS IS THE COVER PAGE */}
+            <div
+              className="page flex items-center justify-center text-2xl font-bold text-black dark:text-white border border-black rounded-sm"
+              style={{
+                // Change this line to use the new public folder path
+                backgroundImage: `url(/Gemini_Generated_Image_ctktr6ctktr6ctkt (1).png)`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            >
+              {/* You can add text here, or keep it empty */}
             </div>
             {notes.length === 0 && (
               <div className="page bg-white dark:bg-gray-800 p-4 flex items-center justify-center italic text-black dark:text-white border border-black rounded-sm notebook-lines">
