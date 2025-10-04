@@ -22,15 +22,24 @@ function App() {
   };
 
   return (
-    <Router>
-      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-      <Routes>
-        <Route path="/login" element={<Login theme={theme} />} />
-        <Route path="/signup" element={<Signup theme={theme} />} />
-        <Route path="/diary" element={<DiaryPage theme={theme} toggleTheme={toggleTheme} />} />
-        <Route path="/" element={<Navigate to="/login" />} />
-      </Routes>
-    </Router>
+    <>
+      <style>
+        {`
+          body, html {
+            cursor: url('/cursor.png') 25 25, auto;
+          }
+        `}
+      </style>
+      <Router>
+        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+        <Routes>
+          <Route path="/login" element={<Login theme={theme} />} />
+          <Route path="/signup" element={<Signup theme={theme} />} />
+          <Route path="/diary" element={<DiaryPage theme={theme} toggleTheme={toggleTheme} />} />
+          <Route path="/" element={<Navigate to="/login" />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
