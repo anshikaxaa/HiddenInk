@@ -17,14 +17,23 @@ const Login = ({ theme }) => {
     try {
       const response = await authAPI.login(email, password);
 
-      // Store token and user data
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      if (response.success === false) {
+        // Show error image for invalid credentials
+        setError('invalid_credentials');
+      } else {
+        // Store token and user data
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
 
-      // Redirect to diary
-      navigate('/diary');
+        // Redirect to diary
+        navigate('/diary');
+      }
     } catch (err) {
-      setError(err.message || 'Login failed');
+      if (err.message === 'Invalid email or password') {
+        setError('invalid_credentials');
+      } else {
+        setError(err.message || 'Login failed');
+      }
     } finally {
       setLoading(false);
     }
@@ -81,8 +90,16 @@ const Login = ({ theme }) => {
           </div>
 
           {error && (
-            <div className="text-red-600 dark:text-red-400 text-sm text-center">
-              {error}
+            <div className="text-center">
+              {error === 'invalid_credentials' ? (
+                <img
+                  src="/error.png"
+                  alt="Wrong Credentials"
+                  className="mx-auto w-24 h-24"
+                />
+              ) : (
+                <div className="text-red-600 dark:text-red-400 text-sm text-center">{error}</div>
+              )}
             </div>
           )}
 

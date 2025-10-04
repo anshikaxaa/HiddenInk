@@ -18,6 +18,9 @@ const Diary = ({ notes, theme }) => {
             background-position: 0 20px;
             line-height: 25px;
           }
+          .diary-container {
+            cursor: url('/cursor.png') 25 25, auto;
+          }
         `}
       </style>
       <div className="diary-container h-full bg-pink-100 dark:bg-gray-900 p-4 flex flex-col">
@@ -45,13 +48,14 @@ const Diary = ({ notes, theme }) => {
             <div
               className="page flex items-center justify-center text-2xl font-bold text-black dark:text-white border border-black rounded-sm"
               style={{
-                // Change this line to use the new public folder path
-                backgroundImage: `url(/Gemini_Generated_Image_ctktr6ctktr6ctkt (1).png)`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
+                background: '#fff',
+                minHeight: '600px',
+                minWidth: '500px',
+                boxShadow: '0 0 10px rgba(0,0,0,0.2)'
               }}
             >
-              {/* You can add text here, or keep it empty */}
+              {/* Show the image directly for debugging */}
+              <img src="/cover.png" alt="Diary Cover" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
             {notes.length === 0 && (
               <div className="page bg-white dark:bg-gray-800 p-4 flex items-center justify-center italic text-black dark:text-white border border-black rounded-sm notebook-lines">
